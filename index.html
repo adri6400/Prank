@@ -20,6 +20,13 @@
             font-family: Arial, sans-serif;
         }
         
+        /* Positionnement du bouton en haut à droite */
+        .top-right-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
         /* Modal style */
         #prankForm {
             background-color: rgba(0, 0, 0, 0.8);
@@ -46,7 +53,16 @@
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen">
-    <button onclick="showPrankForm()" class="px-6 py-3 text-white bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none">
+    <!-- Bouton de connexion en haut à droite -->
+    <style>
+        .top-right-button {
+            position: absolute;
+            top: 10px; /* Ajustez cette valeur pour déplacer le bouton plus haut */
+            left: 1475px; /* Ajustez cette valeur pour déplacer le bouton plus à gauche */
+        }
+    </style>
+    
+    <button onclick="showPrankForm()" class="top-right-button px-6 py-3 text-white bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none mr-12">
         Connexion Activision
     </button>
 
