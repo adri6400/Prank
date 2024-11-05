@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Surprise!</title>
+</head>
+<body>
+    <button onclick="showPrankForm()">Clique ici!</button>
+
+    <div id="prankForm" style="display: none;">
+        <h2>Formulaire de Blague</h2>
+        <p>Pour continuer, entrez les informations suivantes :</p>
+        <label>Identifiant secret de l’amitié :</label>
+        <input type="text" id="friendId" placeholder="ex: 123-amitié"><br><br>
+        
+        <label>Code spécial de blague :</label>
+        <input type="password" id="prankCode" placeholder="******"><br><br>
+        
+        <button onclick="submitPrankForm()">Soumettre</button>
+    </div>
+
+    <script>
+        function showPrankForm() {
+            document.getElementById("prankForm").style.display = "block";
+            alert('Surprise! Tu as cliqué sur le bouton!');
+        }
+
+        function submitPrankForm() {
+            let friendId = document.getElementById("friendId").value;
+            let prankCode = document.getElementById("prankCode").value;
+
+            if (friendId === "123-amitié" && prankCode === "blague") {
+                alert("Félicitations! Tu as passé le test de l'amitié 😂");
+            } else {
+                alert("Oups! Mauvais code! Essaie encore! 😜");
+            }
+        }
+    </script>
+</body>
+</html>
